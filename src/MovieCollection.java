@@ -172,9 +172,9 @@ public class MovieCollection
         for(Movie movie:movies){
             String[] castArray = movie.getCast().split("\\|");
             for(String castMember:castArray){
-                castMember = castMember.toLowerCase();
-                if(!actors.contains(castMember)){
-                    actors.add(castMember);
+                String trimmedCastMember = castMember.toLowerCase().toLowerCase();
+                if(!actors.contains(trimmedCastMember)){
+                    actors.add(trimmedCastMember);
                 }
             }
         }
@@ -182,8 +182,8 @@ public class MovieCollection
         System.out.println("Cast members:");
         for(int i = 0; i < actors.size(); i++){
                 System.out.println((i+1) + "." + actors.get(i));
-
         }
+        System.out.println();
 
 
     }
