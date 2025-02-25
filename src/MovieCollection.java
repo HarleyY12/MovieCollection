@@ -161,12 +161,8 @@ public class MovieCollection
         System.out.println("User rating: " + movie.getUserRating());
         System.out.println("Box office revenue: " + movie.getRevenue());
     }
-
-    private void searchCast()
+ private void searchCast()
     {
-        System.out.print("Enter actor:");
-        String actorToFind = scanner.nextLine();
-        actorToFind = actorToFind.toLowerCase();
         ArrayList<String>actors = new ArrayList<>();
 
         for(Movie movie:movies){
@@ -183,8 +179,29 @@ public class MovieCollection
         for(int i = 0; i < actors.size(); i++){
                 System.out.println((i+1) + "." + actors.get(i));
         }
-        System.out.println();
-
+        System.out.println("Which actor?");
+        int actorToFind = scanner.nextInt();
+        scanner.nextLine();
+        String chosenActor = actors.get(actorToFind-1);
+        System.out.println("You searched for " + chosenActor);
+        ArrayList<Movie>moviesWithChosenActor = new ArrayList<>();
+        for(Movie movie:movies){
+            String[] castArray = movie.getCast().split("\\|");
+            for(String castMember : castArray){
+                if(castMember.trim().equalsIgnoreCase(chosenActor)){
+                    moviesWithChosenActor.add(movie);
+                }
+            }
+        }
+        System.out.println("Movies with " + chosenActor);
+        for(int i = 0;i<moviesWithChosenActor.size();i++){
+            System.out.println((i+1)+"."+ moviesWithChosenActor.get(i).getTitle());
+        }
+        System.out.println("Choose a movie to learn more");
+        int movieChoice = scanner.nextInt();
+        scanner.nextLine();
+        Movie chosenMovie = moviesWithChosenActor.get(movieChoice-1);
+        displayMovieInfo(chosenMovie);
 
     }
 
