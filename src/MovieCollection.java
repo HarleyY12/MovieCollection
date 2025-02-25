@@ -1,8 +1,8 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.sql.SQLOutput;
+import java.util.*;
 
 public class MovieCollection
 {
@@ -81,7 +81,7 @@ public class MovieCollection
 
     private void searchTitles()
     {
-        System.out.print("Enter a tital search term: ");
+        System.out.print("Enter a title search term: ");
         String searchTerm = scanner.nextLine();
 
         // prevent case sensitivity
@@ -164,6 +164,27 @@ public class MovieCollection
 
     private void searchCast()
     {
+        System.out.print("Enter actor:");
+        String actorToFind = scanner.nextLine();
+        actorToFind = actorToFind.toLowerCase();
+        ArrayList<String>actors = new ArrayList<>();
+
+        for(Movie movie:movies){
+            String[] castArray = movie.getCast().split("\\|");
+            for(String castMember:castArray){
+                castMember = castMember.toLowerCase();
+                if(!actors.contains(castMember)){
+                    actors.add(castMember);
+                }
+            }
+        }
+        Collections.sort(actors);
+        System.out.println("Cast members:");
+        for(int i = 0; i < actors.size(); i++){
+                System.out.println((i+1) + "." + actors.get(i));
+
+        }
+
 
     }
 
