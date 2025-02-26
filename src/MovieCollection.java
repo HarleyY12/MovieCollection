@@ -164,9 +164,6 @@ public class MovieCollection
 
     private void searchCast()
     {
-        System.out.print("Enter actor:");
-        String actorToFind = scanner.nextLine();
-        actorToFind = actorToFind.toLowerCase();
         ArrayList<String>actors = new ArrayList<>();
 
         for(Movie movie:movies){
@@ -183,7 +180,29 @@ public class MovieCollection
         for(int i = 0; i < actors.size(); i++){
                 System.out.println((i+1) + "." + actors.get(i));
         }
-        System.out.println();
+        System.out.println("Choose cast member");
+        int castMemberNumber = scanner.nextInt();
+        scanner.nextLine();
+        String chosenCastMember = actors.get(castMemberNumber-1);
+        System.out.println("You chose" + chosenCastMember);
+        ArrayList<Movie>moviesWithCastMember = new ArrayList<>();
+        for(Movie movie : movies){
+            String[]castArray = movie.getCast().split("\\|");
+            for(String castMember:castArray){
+                if(castMember.trim().equalsIgnoreCase(chosenCastMember)){
+                    moviesWithCastMember.add(movie);
+                }
+            }
+        }
+        System.out.println("Movies with " + chosenCastMember);
+        for (int i = 0; i< moviesWithCastMember.size();i++){
+            System.out.println((i+1)+"."+moviesWithCastMember.get(i).getTitle());
+        }
+        System.out.println("Enter movie number to learn more");
+        int movieNumber = scanner.nextInt();
+        scanner.nextLine();
+        Movie chosenMovie = moviesWithCastMember.get(movieNumber-1);
+        displayMovieInfo(chosenMovie);
 
 
     }
