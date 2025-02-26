@@ -271,9 +271,8 @@ public class MovieCollection
             }
         }
         for (int o = 0; o < 50; o++) {
-            Movie movie = highestRatedMovies.get(o);
-            System.out.println((o + 1) + "." + movie.getTitle()
-                    + " Rating:" + movie.getUserRating());
+            System.out.println((o + 1) + "." + highestRatedMovies.get(o).getTitle()
+                    + " Rating:" + highestRatedMovies.get(o).getUserRating());
         }
         System.out.println("What movie would you like to learn about?");
         int choice = scanner.nextInt();
@@ -283,11 +282,31 @@ public class MovieCollection
         System.out.println("\n ** Press Enter to Return to Main Menu **");
         scanner.nextLine();
 
-
     }
 
     private void listHighestRevenue()
     {
+        ArrayList<Movie>highestEarningMovies = new ArrayList<>(movies);
+        for(int i = 0; i < highestEarningMovies.size();i++){
+            for(int j = i + 1; j < highestEarningMovies.size();j++){
+                if(highestEarningMovies.get(i).getRevenue()<highestEarningMovies.get(j).getRevenue()){
+                    Movie temp = highestEarningMovies.get(i);
+                    highestEarningMovies.set(i,highestEarningMovies.get(j));
+                    highestEarningMovies.set(j,temp);
+                }
+            }
+        }
+        for (int o = 0; o < 50;o++){
+            System.out.println((o+1)+"." + highestEarningMovies.get(o).getTitle() + " Revenue:" +
+            highestEarningMovies.get(o).getRevenue());
+        }
+        System.out.println("What movie do you want to learn about?");
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+        Movie selectedMovie = highestEarningMovies.get(choice-1);
+        displayMovieInfo(selectedMovie);
+        System.out.println("\n ** Press Enter to Return to Main Menu **");
+        scanner.nextLine();
 
     }
 
