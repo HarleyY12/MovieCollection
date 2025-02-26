@@ -261,30 +261,29 @@ public class MovieCollection
     private void listHighestRated()
     {
         ArrayList<Movie>highestRatedMovies = new ArrayList<>(movies);
-        for(int i = 0;i < movies.size();i++){
-            for(int j = i + 1; j< movies.size();j++){
-                if(movies.get(i).getUserRating()<movies.get(j).getUserRating()){
-                    Movie temp = movies.get(i);
-                    highestRatedMovies.add(i,movies.get(j));
-                    highestRatedMovies.add(j,temp);
+        for(int i = 0;i < highestRatedMovies.size();i++) {
+            for (int j = i + 1; j < highestRatedMovies.size(); j++) {
+                if (highestRatedMovies.get(i).getUserRating() < highestRatedMovies.get(j).getUserRating()) {
+                    Movie temp = highestRatedMovies.get(i);
+                    highestRatedMovies.set(i, highestRatedMovies.get(j));
+                    highestRatedMovies.set(j, temp);
                 }
             }
-            for(int o = 0;o < 50;o++){
-                System.out.println((o+1)+"."+highestRatedMovies.get(o).getTitle()
-                        +"Rating:"+ highestRatedMovies.get(o).getUserRating());
-            }
-            System.out.println("What movie would you like to learn about?");
-            int choice = scanner.nextInt();
-            scanner.nextLine();
-            Movie selectedMovie = highestRatedMovies.get(choice-1);
-            displayMovieInfo(selectedMovie);
-            System.out.println("\n ** Press Enter to Return to Main Menu **");
-            scanner.nextLine();
-
-
-
-
         }
+        for (int o = 0; o < 50; o++) {
+            Movie movie = highestRatedMovies.get(o);
+            System.out.println((o + 1) + "." + movie.getTitle()
+                    + " Rating:" + movie.getUserRating());
+        }
+        System.out.println("What movie would you like to learn about?");
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+        Movie selectedMovie = highestRatedMovies.get(choice - 1);
+        displayMovieInfo(selectedMovie);
+        System.out.println("\n ** Press Enter to Return to Main Menu **");
+        scanner.nextLine();
+
+
     }
 
     private void listHighestRevenue()
